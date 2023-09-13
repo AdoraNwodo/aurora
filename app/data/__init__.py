@@ -9,7 +9,11 @@ import azure.functions as func
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-
+    
+    headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+    }
     chat = ChatOpenAI(model_name="gpt-4", temperature=0.9, max_tokens=1000)
     messages = [
         SystemMessage(content="Hello, I am an Pulumi engineer chatbot."),
@@ -18,7 +22,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     response=chat(messages)
 
-    return {
-        'statusCode': 200,
-        'body': response
-    }
+    return func.HttpResponse(
+        json.dumps({'statusCode': 200,'body': response}), headers=headers, status_code=200
+    )
