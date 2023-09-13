@@ -1,0 +1,6 @@
+config:
+  aurora:appPath: ./app
+  aurora:errorDocument: error.html
+  aurora:indexDocument: index.html
+  aurora:sitePath: ./www
+  azure-native:location: WestUS
